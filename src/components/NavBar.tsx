@@ -11,8 +11,10 @@ export default function NavBar() {
         <Button variant="outline">Button</Button>
       </div>
 
-      <ModeToggle />
-      <UserButton showName />
+      <div className="space-x-4">
+        <ModeToggle />
+        <UserButton showName />
+      </div>
     </div>
   );
 }
