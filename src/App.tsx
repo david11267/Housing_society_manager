@@ -7,7 +7,9 @@ function App() {
     <>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <SignedOut>
-          <SignIn />
+          <div className="flex justify-center h-svh items-center ">
+            <SignIn />
+          </div>
         </SignedOut>
         <SignedIn>
           <MainLayout />
