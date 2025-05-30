@@ -1,20 +1,19 @@
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from '@clerk/clerk-react';
+import { SignedIn, SignedOut, SignIn } from '@clerk/clerk-react';
+import MainLayout from './layouts/MainLayout';
+import { ThemeProvider } from '@/components/theme-provider';
 
 function App() {
   return (
-    <header>
-      <SignedOut>
-        <SignInButton />
-      </SignedOut>
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
-    </header>
+    <>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <SignedOut>
+          <SignIn />
+        </SignedOut>
+        <SignedIn>
+          <MainLayout />
+        </SignedIn>
+      </ThemeProvider>
+    </>
   );
 }
 
