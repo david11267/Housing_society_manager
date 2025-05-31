@@ -2,18 +2,11 @@ import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   useReactTable,
-} from '@tanstack/react-table';
+} from "@tanstack/react-table";
 
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 type Person = {
   name: string;
@@ -22,25 +15,25 @@ type Person = {
 };
 
 const data: Person[] = [
-  { name: 'Alice', age: 25, status: 'Active' },
-  { name: 'Bob', age: 30, status: 'Inactive' },
-  { name: 'Charlie', age: 35, status: 'Pending' },
+  { name: "Alice", age: 25, status: "Active" },
+  { name: "Bob", age: 30, status: "Inactive" },
+  { name: "Charlie", age: 35, status: "Pending" },
 ];
 
 const columnHelper = createColumnHelper<Person>();
 
 const columns = [
-  columnHelper.accessor('name', {
-    header: 'Name',
-    cell: info => info.getValue(),
+  columnHelper.accessor("name", {
+    header: "Name",
+    cell: (info) => info.getValue(),
   }),
-  columnHelper.accessor('age', {
-    header: 'Age',
-    cell: info => info.getValue(),
+  columnHelper.accessor("age", {
+    header: "Age",
+    cell: (info) => info.getValue(),
   }),
-  columnHelper.accessor('status', {
-    header: 'Status',
-    cell: info => info.getValue(),
+  columnHelper.accessor("status", {
+    header: "Status",
+    cell: (info) => info.getValue(),
   }),
 ];
 
@@ -49,56 +42,38 @@ export default function DataTable() {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    globalFilterFn: "includesString", // built-in filter function
   });
+
   return (
-    <div>
+    <>
+      <input
+        value={table.getState().globalFilter}
+        onChange={(e) => table.setGlobalFilter(String(e.target.value))}
+        placeholder="Global filter Search..."
+      />
       <Table>
         <TableCaption>A list of your recent invoices.</TableCaption>
         <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">Invoice</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Method</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
-          </TableRow>
+          {table.getHeaderGroups().map((hg) => (
+            <TableRow key={hg.id}>
+              {hg.headers.map((h) => (
+                <TableHead key={h.id}>{flexRender(h.column.columnDef.header, h.getContext())}</TableHead>
+              ))}
+            </TableRow>
+          ))}
         </TableHeader>
         <TableBody>
-          <TableRow>
-            <TableCell className="font-medium">INV001</TableCell>
-            <TableCell>Paid</TableCell>
-            <TableCell>Credit Card</TableCell>
-            <TableCell className="text-right">$250.00</TableCell>
-          </TableRow>
+          {table.getRowModel().rows.map((row) => (
+            <TableRow key={row.id}>
+              {row.getVisibleCells().map((cell) => (
+                <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+              ))}
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
-
-      <table>
-        <thead>
-          {table.getHeaderGroups().map(headerGroup => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map(header => (
-                <th key={header.id}>
-                  {flexRender(
-                    header.column.columnDef.header,
-                    header.getContext()
-                  )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map(row => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map(cell => (
-                <td key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    </>
   );
 }
