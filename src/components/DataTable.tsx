@@ -8,6 +8,8 @@ import {
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { data, type FakeData } from "@/types";
+import { Button } from "./ui/button";
+import CrudDialog from "./crudDialog";
 
 const columnHelper = createColumnHelper<FakeData>();
 
@@ -55,7 +57,6 @@ const columns = [
     header: "Accessibility",
     cell: (info) => info.getValue(),
   }),
-
   columnHelper.accessor((row) => row.todos.length, {
     id: "todosCount",
     header: "To-dos",
@@ -83,18 +84,23 @@ export default function DataTable() {
   });
 
   return (
-    <>
-      <input
-        value={table.getState().globalFilter}
-        onChange={(e) => table.setGlobalFilter(String(e.target.value))}
-        placeholder="Global filter Search..."
-      />
+    <div className="max-h-[50rem] overflow-y-auto">
+      <div className="space-x-4 space-y-4">
+        <CrudDialog btnText="Add Row" />
+        <input
+          value={table.getState().globalFilter}
+          onChange={(e) => table.setGlobalFilter(String(e.target.value))}
+          placeholder="Global filter Search..."
+        />
+      </div>
       <Table>
-        <TableHeader className="text-lg ">
+        <TableHeader>
           {table.getHeaderGroups().map((hg) => (
             <TableRow key={hg.id}>
               {hg.headers.map((h) => (
-                <TableHead key={h.id}>{flexRender(h.column.columnDef.header, h.getContext())}</TableHead>
+                <TableHead key={h.id} className="sticky top-0 z-10 bg-accent">
+                  {flexRender(h.column.columnDef.header, h.getContext())}
+                </TableHead>
               ))}
             </TableRow>
           ))}
@@ -109,6 +115,6 @@ export default function DataTable() {
           ))}
         </TableBody>
       </Table>
-    </>
+    </div>
   );
 }
