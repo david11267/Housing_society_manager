@@ -6,34 +6,70 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { data, type FakeData } from "@/types";
 
-type Person = {
-  name: string;
-  age: number;
-  status: string;
-};
-
-const data: Person[] = [
-  { name: "Alice", age: 25, status: "Active" },
-  { name: "Bob", age: 30, status: "Inactive" },
-  { name: "Charlie", age: 35, status: "Pending" },
-];
-
-const columnHelper = createColumnHelper<Person>();
+const columnHelper = createColumnHelper<FakeData>();
 
 const columns = [
   columnHelper.accessor("name", {
     header: "Name",
     cell: (info) => info.getValue(),
   }),
-  columnHelper.accessor("age", {
-    header: "Age",
+  columnHelper.accessor("address", {
+    header: "Address",
     cell: (info) => info.getValue(),
   }),
-  columnHelper.accessor("status", {
-    header: "Status",
+  columnHelper.accessor("builtYear", {
+    header: "Built",
     cell: (info) => info.getValue(),
+  }),
+  columnHelper.accessor("nrOfApartments", {
+    header: "Apartments",
+    cell: (info) => info.getValue(),
+  }),
+  columnHelper.accessor("lastNotesDrop", {
+    header: "Last Notes Drop",
+    cell: (info) => info.getValue().toLocaleString(),
+  }),
+  columnHelper.accessor("lastUpdated", {
+    header: "Last Updated",
+    cell: (info) => info.getValue().toLocaleString(),
+  }),
+  columnHelper.accessor("registeredPhoneNumbers", {
+    header: "Phones",
+    cell: (info) => info.getValue(),
+  }),
+  columnHelper.accessor((row) => row.portCode.code, {
+    id: "portCode.code",
+    header: "Port Code",
+    cell: (info) => info.getValue(),
+  }),
+  columnHelper.accessor((row) => row.portCode.status, {
+    id: "portCode.status",
+    header: "Port Status",
+    cell: (info) => info.getValue(),
+  }),
+  columnHelper.accessor((row) => row.portCode.accessibility, {
+    id: "portCode.accessibility",
+    header: "Accessibility",
+    cell: (info) => info.getValue(),
+  }),
+
+  columnHelper.accessor((row) => row.todos.length, {
+    id: "todosCount",
+    header: "To-dos",
+    cell: (info) => info.getValue(),
+  }),
+  columnHelper.accessor((row) => row.notes.length, {
+    id: "notesCount",
+    header: "Notes",
+    cell: (info) => info.getValue(),
+  }),
+  columnHelper.accessor((row) => row.portCode.lastUpdate, {
+    id: "portCode.lastUpdate",
+    header: "Port Updated",
+    cell: (info) => info.getValue().toLocaleString(),
   }),
 ];
 
@@ -54,8 +90,7 @@ export default function DataTable() {
         placeholder="Global filter Search..."
       />
       <Table>
-        <TableCaption>A list of your recent invoices.</TableCaption>
-        <TableHeader>
+        <TableHeader className="text-lg ">
           {table.getHeaderGroups().map((hg) => (
             <TableRow key={hg.id}>
               {hg.headers.map((h) => (
