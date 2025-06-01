@@ -10,16 +10,16 @@ type Props = {
 
 export default function CrudDialog({ data, btnText }: Props) {
   return (
-    <Button>
-      <Dialog>
-        <DialogTrigger>{btnText}</DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Add new Data Row</DialogTitle>
-            <CrudFrom />
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
-    </Button>
+    <Dialog>
+      <Button >
+        <DialogTrigger className="cursor-pointer">{btnText}</DialogTrigger>
+      </Button>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Add new Data Row</DialogTitle>
+          <CrudFrom />
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
   );
 }

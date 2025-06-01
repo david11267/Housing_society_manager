@@ -8,7 +8,6 @@ import {
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { data, type FakeData } from "@/types";
-import { Button } from "./ui/button";
 import CrudDialog from "./crudDialog";
 
 const columnHelper = createColumnHelper<FakeData>();
@@ -86,7 +85,7 @@ export default function DataTable() {
   return (
     <div className="max-h-[50rem] overflow-y-auto">
       <div className="space-x-4 space-y-4">
-        <CrudDialog btnText="Add Row" />
+        <CrudDialog data={data[0]} btnText="Add Row" />
         <input
           value={table.getState().globalFilter}
           onChange={(e) => table.setGlobalFilter(String(e.target.value))}
@@ -107,7 +106,7 @@ export default function DataTable() {
         </TableHeader>
         <TableBody>
           {table.getRowModel().rows.map((row) => (
-            <TableRow key={row.id}>
+            <TableRow className="cursor-pointer" key={row.id}>
               {row.getVisibleCells().map((cell) => (
                 <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
               ))}
