@@ -99,7 +99,7 @@ export function CrudFrom({ formType, data }: Props) {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Housing society name</FormLabel>
+                <FormLabel>Name</FormLabel>
                 <FormControl>
                   <Input placeholder="ex: BRF lyran" {...field} />
                 </FormControl>
@@ -187,7 +187,7 @@ export function CrudFrom({ formType, data }: Props) {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Status</FormLabel>
-                <Select onValueChange={field.onChange} value="" defaultValue={field.value}>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Select port status" />
@@ -209,17 +209,17 @@ export function CrudFrom({ formType, data }: Props) {
             name="portCode.accessibility"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Status</FormLabel>
-                <Select onValueChange={field.onChange} value="" defaultValue={field.value}>
+                <FormLabel>Accessibility</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Select accessibility" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="stairs">Stairs</SelectItem>
-                    <SelectItem value="elevator">Elevator</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
+                    <SelectItem value="easy">Easy</SelectItem>
+                    <SelectItem value="medium">Medium</SelectItem>
+                    <SelectItem value="hard">Hard</SelectItem>
                   </SelectContent>
                 </Select>
 
