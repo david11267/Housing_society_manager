@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
 import NotesAndComments from "./notesAndComments";
 
 export const formSchema = z.object({
@@ -33,7 +34,11 @@ export const formSchema = z.object({
   }),
 });
 
-export function CrudFrom() {
+type Props = {
+  formType: "add" | "update";
+};
+
+export function CrudFrom({ formType }: Props) {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -47,13 +52,6 @@ export function CrudFrom() {
       },
     },
   });
-
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-  }
   // Converts a Date to "YYYY-MM-DDTHH:MM" format
   function toDateTimeLocalString(date: Date): string {
     const pad = (n: number) => n.toString().padStart(2, "0");
@@ -61,11 +59,17 @@ export function CrudFrom() {
       date.getMinutes()
     )}`;
   }
+  // 2. Define a submit handler.
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    // Do something with the form values.
+    // ✅ This will be type-safe and validated.
+    console.log(values);
+  }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 grid grid-cols-2 gap-4">
-        <div>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-2 gap-4">
+        <div className="space-y-4">
           <FormField
             control={form.control}
             name="name"
@@ -202,7 +206,7 @@ export function CrudFrom() {
           <span>Last update: </span>
         </div>
         <NotesAndComments />
-        <Button type="submit">Submit</Button>
+        {formType === "add" ? <Button type="submit">Submit</Button> : <Button type="submit">Update</Button>}
       </form>
     </Form>
   );

@@ -17,12 +17,12 @@ export default function NotesAndComments() {
         </div>
         <TabsContent value="comments">
           <Button className="w-full" variant={"outline"}>
-            Add comment
+            Add Comment
           </Button>
         </TabsContent>
         <TabsContent value="complaints">
           <Button className="w-full" variant={"outline"}>
-            Add complaint
+            Add Complaint
           </Button>
         </TabsContent>
         <TabsContent value="todo">
