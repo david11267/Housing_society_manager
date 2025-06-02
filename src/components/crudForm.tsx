@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import NotesAndComments from "./notesAndComments";
+
 export const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   address: z.string().min(5, { message: "Address must be at least 5 characters." }),
@@ -62,82 +64,82 @@ export function CrudFrom() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Housing society name</FormLabel>
-              <FormControl>
-                <Input placeholder="ex: BRF lyran" {...field} />
-              </FormControl>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 grid grid-cols-2 gap-4">
+        <div>
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Housing society name</FormLabel>
+                <FormControl>
+                  <Input placeholder="ex: BRF lyran" {...field} />
+                </FormControl>
 
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="address"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Address</FormLabel>
-              <FormControl>
-                <Input placeholder="ex: salt street 53 stockholm" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="builtYear"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Built</FormLabel>
-              <FormControl>
-                <Input
-                  type="datetime-local"
-                  value={field.value ? toDateTimeLocalString(field.value) : ""}
-                  onChange={(e) => field.onChange(e.target.value ? new Date(e.target.value) : null)}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="nrOfApartments"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Apartments amount</FormLabel>
-              <FormControl>
-                <Input type="number" placeholder="ex: 43" {...field} />
-              </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="address"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Address</FormLabel>
+                <FormControl>
+                  <Input placeholder="ex: salt street 53 stockholm" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="builtYear"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Built</FormLabel>
+                <FormControl>
+                  <Input
+                    type="datetime-local"
+                    value={field.value ? toDateTimeLocalString(field.value) : ""}
+                    onChange={(e) => field.onChange(e.target.value ? new Date(e.target.value) : null)}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="nrOfApartments"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Apartments amount</FormLabel>
+                <FormControl>
+                  <Input type="number" placeholder="ex: 43" {...field} />
+                </FormControl>
 
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <FormField
-          control={form.control}
-          name="lastNotesDrop"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Last note drop date</FormLabel>
-              <FormControl>
-                <Input type="datetime-local" value={field.value ? toDateTimeLocalString(field.value) : ""} />
-              </FormControl>
+          <FormField
+            control={form.control}
+            name="lastNotesDrop"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Last note drop date</FormLabel>
+                <FormControl>
+                  <Input type="datetime-local" value={field.value ? toDateTimeLocalString(field.value) : ""} />
+                </FormControl>
 
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <div className=" grid grid-cols-2 gap-2 ">
           <FormField
             control={form.control}
             name="portCode.code"
@@ -199,6 +201,7 @@ export function CrudFrom() {
           />
           <span>Last update: </span>
         </div>
+        <NotesAndComments />
         <Button type="submit">Submit</Button>
       </form>
     </Form>
