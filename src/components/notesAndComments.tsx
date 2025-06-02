@@ -17,19 +17,19 @@ export default function NotesAndComments({ notes }: Props) {
       <FormLabel>Notes</FormLabel>
 
       <Tabs defaultValue="comment">
-        <TabsList>
-          <TabsTrigger className="cursor-pointer" value="comment">
+        <TabsList className="w-full ">
+          <TabsTrigger className="cursor-pointer p-1" value="comment">
             Comments
           </TabsTrigger>
-          <TabsTrigger className="cursor-pointer" value="complaint">
+          <TabsTrigger className="cursor-pointer p-1" value="complaint">
             Complaints
           </TabsTrigger>
-          <TabsTrigger className="cursor-pointer" value="todo">
+          <TabsTrigger className="cursor-pointer p-1" value="todo">
             Todo
           </TabsTrigger>
         </TabsList>
         <div className="grid w-full gap-3">
-          <Textarea placeholder="Type your message here." id="message" />
+          <Textarea placeholder="First row is header the rest is content" id="message" />
         </div>
         <CustomTabsContent contentName="comment" notes={comments} />
         <CustomTabsContent contentName="todo" notes={todo} />

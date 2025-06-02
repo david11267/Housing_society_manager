@@ -99,7 +99,7 @@ export function CrudFrom({ formType, data }: Props) {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name</FormLabel>
+                <FormLabel>Housing society name</FormLabel>
                 <FormControl>
                   <Input placeholder="ex: BRF lyran" {...field} />
                 </FormControl>
