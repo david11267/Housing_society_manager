@@ -1,19 +1,35 @@
 import { Button } from "./ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+
 import { Textarea } from "./ui/textarea";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function NotesAndComments() {
   return (
-    <div className="flex justify-center">
-      <Tabs defaultValue="notes" className="w-[400px]">
+    <div className="space-y-4">
+      <Tabs defaultValue="comments">
         <TabsList>
-          <TabsTrigger value="notes">Notes</TabsTrigger>
           <TabsTrigger value="comments">Comments</TabsTrigger>
+          <TabsTrigger value="complaints">Complaints</TabsTrigger>
+          <TabsTrigger value="todo">Todo</TabsTrigger>
         </TabsList>
-        <Textarea />
-        <Button>Save</Button>
-        <TabsContent value="notes"></TabsContent>
-        <TabsContent value="comments">Change your password here.</TabsContent>
+        <div className="grid w-full gap-3">
+          <Textarea placeholder="Type your message here." id="message" />
+        </div>
+        <TabsContent value="comments">
+          <Button className="w-full" variant={"outline"}>
+            Add comment
+          </Button>
+        </TabsContent>
+        <TabsContent value="complaints">
+          <Button className="w-full" variant={"outline"}>
+            Add complaint
+          </Button>
+        </TabsContent>
+        <TabsContent value="todo">
+          <Button className="w-full" variant={"outline"}>
+            Add Todo
+          </Button>
+        </TabsContent>
       </Tabs>
     </div>
   );
