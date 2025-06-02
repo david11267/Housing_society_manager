@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 import NotesAndComments from "./notesAndComments";
+import type { FakeData } from "@/types";
 
 export const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -22,7 +23,7 @@ export const formSchema = z.object({
   registeredPhoneNumbers: z.number().int().min(0, { message: "Must be zero or more registered phone numbers." }),
   portCode: z.object({
     code: z.string().regex(/^\d{4}$/, { message: "Port code must be a 4-digit number." }),
-    status: z.enum(["active", "inactive"], {
+    status: z.enum(["ok", "broken", "other"], {
       required_error: "Status must be 'active' or 'inactive'.",
     }),
     accessibility: z.enum(["yes", "no"], {
@@ -36,21 +37,44 @@ export const formSchema = z.object({
 
 type Props = {
   formType: "add" | "update";
+  data?: FakeData;
 };
 
-export function CrudFrom({ formType }: Props) {
+export function CrudFrom({ formType, data }: Props) {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      portCode: {
-        code: "",
-        status: "active",
-        accessibility: "yes",
-        lastUpdate: new Date(),
-      },
-    },
+    defaultValues: data
+      ? {
+          name: data.name,
+          address: data.address,
+          builtYear: data.builtYear ? new Date(data.builtYear) : new Date(),
+          nrOfApartments: data.nrOfApartments,
+          lastNotesDrop: data.lastNotesDrop ? new Date(data.lastNotesDrop) : new Date(),
+          lastUpdated: data.lastUpdated ? new Date(data.lastUpdated) : new Date(),
+          registeredPhoneNumbers: data.registeredPhoneNumbers,
+          portCode: {
+            code: data.portCode.code,
+            status: data.portCode.status as "ok" | "broken" | "other",
+            accessibility: data.portCode.accessibility as "yes" | "no",
+            lastUpdate: data.portCode.lastUpdate ? new Date(data.portCode.lastUpdate) : new Date(),
+          },
+        }
+      : {
+          name: "",
+          address: "",
+          builtYear: new Date(),
+          nrOfApartments: 1,
+          lastNotesDrop: new Date(),
+          lastUpdated: new Date(),
+          registeredPhoneNumbers: 0,
+          portCode: {
+            code: "",
+            status: "ok",
+            accessibility: "yes",
+            lastUpdate: new Date(),
+          },
+        },
   });
   // Converts a Date to "YYYY-MM-DDTHH:MM" format
   function toDateTimeLocalString(date: Date): string {

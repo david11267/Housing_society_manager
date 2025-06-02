@@ -1,3 +1,4 @@
+import React from "react";
 import {
   createColumnHelper,
   flexRender,
@@ -9,6 +10,8 @@ import {
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { data, type FakeData } from "@/types";
 import CrudDialog from "./crudDialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { CrudFrom } from "./crudForm";
 
 const columnHelper = createColumnHelper<FakeData>();
 
@@ -74,12 +77,15 @@ const columns = [
 ];
 
 export default function DataTable() {
+  const [open, setOpen] = React.useState(false);
+  const [selectedRow, setSelectedRow] = React.useState<FakeData | null>(null);
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    globalFilterFn: "includesString", // built-in filter function
+    globalFilterFn: "includesString",
   });
 
   return (
@@ -106,7 +112,13 @@ export default function DataTable() {
         </TableHeader>
         <TableBody>
           {table.getRowModel().rows.map((row) => (
-            <TableRow className="cursor-pointer" key={row.id}>
+            <TableRow
+              className="cursor-pointer"
+              key={row.id}
+              onClick={() => {
+                setSelectedRow(row.original);
+                setOpen(true);
+              }}>
               {row.getVisibleCells().map((cell) => (
                 <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
               ))}
@@ -114,6 +126,14 @@ export default function DataTable() {
           ))}
         </TableBody>
       </Table>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Row Details</DialogTitle>
+            {selectedRow && <CrudFrom formType="update" data={selectedRow} />}
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
