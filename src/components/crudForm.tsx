@@ -229,7 +229,7 @@ export function CrudFrom({ formType, data }: Props) {
           />
           <span>Last update: </span>
         </div>
-        <NotesAndComments />
+        <NotesAndComments notes={data?.notes} />
         {formType === "add" ? <Button type="submit">Submit</Button> : <Button type="submit">Update</Button>}
       </form>
     </Form>

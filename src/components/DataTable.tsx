@@ -59,13 +59,8 @@ const columns = [
     header: "Accessibility",
     cell: (info) => info.getValue(),
   }),
-  columnHelper.accessor((row) => row.todos.length, {
-    id: "todosCount",
-    header: "To-dos",
-    cell: (info) => info.getValue(),
-  }),
   columnHelper.accessor((row) => row.notes.length, {
-    id: "notesCount",
+    id: "notes",
     header: "Notes",
     cell: (info) => info.getValue(),
   }),

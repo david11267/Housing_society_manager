@@ -17,7 +17,7 @@ export default function CrudDialog({ data, btnText }: Props) {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Add new Data Row</DialogTitle>
-          <CrudFrom formType="add" />
+          <CrudFrom data={data} formType="add" />
         </DialogHeader>
       </DialogContent>
     </Dialog>
