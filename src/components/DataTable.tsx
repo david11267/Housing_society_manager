@@ -87,10 +87,9 @@ export default function DataTable() {
       <div className="space-x-4 space-y-4">
         <Button
           onClick={() => {
-            setSelectedRow(null);
+            setSelectedRow(undefined);
             setOpen(true);
           }}>
-          {" "}
           Add Row
         </Button>
         <input

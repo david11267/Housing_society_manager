@@ -43,6 +43,7 @@ export function CrudFrom({ data }: Props) {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    mode: "onChange",
     defaultValues: data
       ? {
           name: data.name,
