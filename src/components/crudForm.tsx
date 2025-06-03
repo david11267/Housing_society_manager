@@ -23,10 +23,10 @@ export const formSchema = z.object({
   registeredPhoneNumbers: z.number().int().min(0, { message: "Must be zero or more registered phone numbers." }),
   portCode: z.object({
     code: z.string().regex(/^\d{4}$/, { message: "Port code must be a 4-digit number." }),
-    status: z.enum(["ok", "broken", "other"], {
+    status: z.enum(["working", "broken", "changed", "other"], {
       required_error: "Status must be 'active' or 'inactive'.",
     }),
-    accessibility: z.enum(["yes", "no"], {
+    accessibility: z.enum(["easy", "medium", "hard"], {
       required_error: "Accessibility must be 'yes' or 'no'.",
     }),
     lastUpdate: z.date({
@@ -55,8 +55,8 @@ export function CrudFrom({ formType, data }: Props) {
           registeredPhoneNumbers: data.registeredPhoneNumbers,
           portCode: {
             code: data.portCode.code,
-            status: data.portCode.status as "ok" | "broken" | "other",
-            accessibility: data.portCode.accessibility as "yes" | "no",
+            status: data.portCode.status,
+            accessibility: data.portCode.accessibility,
             lastUpdate: data.portCode.lastUpdate ? new Date(data.portCode.lastUpdate) : new Date(),
           },
         }
@@ -70,8 +70,8 @@ export function CrudFrom({ formType, data }: Props) {
           registeredPhoneNumbers: 0,
           portCode: {
             code: "",
-            status: "ok",
-            accessibility: "yes",
+            status: "working",
+            accessibility: "easy",
             lastUpdate: new Date(),
           },
         },
@@ -194,9 +194,10 @@ export function CrudFrom({ formType, data }: Props) {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="ok">OK</SelectItem>
+                    <SelectItem value="working">Working</SelectItem>
                     <SelectItem value="broken">Broken</SelectItem>
-                    <SelectItem value="wrong code">Wrong Code</SelectItem>
+                    <SelectItem value="changed">Changed</SelectItem>
+                    <SelectItem value="other">Other</SelectItem>
                   </SelectContent>
                 </Select>
 

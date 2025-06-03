@@ -10,8 +10,8 @@ import {
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { data, type FakeData } from "@/types";
 import CrudDialog from "./crudDialog";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { CrudFrom } from "./crudForm";
+import FormDialog from "./formDialog";
+import { Button } from "./ui/button";
 
 const columnHelper = createColumnHelper<FakeData>();
 
@@ -86,13 +86,14 @@ export default function DataTable() {
   return (
     <div className="max-h-[50rem] overflow-y-auto">
       <div className="space-x-4 space-y-4">
-        <CrudDialog data={data[0]} btnText="Add Row" />
+        <Button> Add Row</Button>
         <input
           value={table.getState().globalFilter}
           onChange={(e) => table.setGlobalFilter(String(e.target.value))}
           placeholder="Global filter Search..."
         />
       </div>
+
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((hg) => (
@@ -121,14 +122,8 @@ export default function DataTable() {
           ))}
         </TableBody>
       </Table>
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Row Details</DialogTitle>
-            {selectedRow && <CrudFrom formType="update" data={selectedRow} />}
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
+
+      <FormDialog open={open} selectedRow={selectedRow} setOpen={setOpen} />
     </div>
   );
 }

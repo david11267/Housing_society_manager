@@ -4,7 +4,7 @@ import { CrudFrom } from "./crudForm";
 import { Button } from "./ui/button";
 
 type Props = {
-  data: FakeData;
+  data?: FakeData;
   btnText: string;
 };
 
