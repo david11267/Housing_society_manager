@@ -1,7 +1,7 @@
 import { UserButton } from "@clerk/clerk-react";
 import { Button } from "./ui/button";
-import { ModeToggle } from "./mode-toggle";
-import { useTheme } from "./theme-provider";
+import { ModeToggle } from "./ModeToggle";
+import { useTheme } from "./ThemeProvider";
 import { dark } from "@clerk/themes";
 
 export default function NavBar() {

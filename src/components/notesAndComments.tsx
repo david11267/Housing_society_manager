@@ -3,7 +3,7 @@ import { FormLabel } from "./ui/form";
 
 import { Textarea } from "./ui/textarea";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import CustomTabsContent from "./customTabsContent";
+import CustomTabsContent from "./CustomTabsContent";
 type Props = {
   notes: Note[] | undefined;
 };

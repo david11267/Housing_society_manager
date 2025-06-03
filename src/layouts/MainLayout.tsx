@@ -1,5 +1,5 @@
 import DataTable from "@/components/DataTable";
-import NavBar from "@/components/navBar";
+import NavBar from "@/components/NavBar";
 
 export default function MainLayout() {
   return (

@@ -1,6 +1,6 @@
-import { SignedIn, SignedOut, SignIn } from '@clerk/clerk-react';
-import MainLayout from './layouts/MainLayout';
-import { ThemeProvider } from '@/components/theme-provider';
+import { SignedIn, SignedOut, SignIn } from "@clerk/clerk-react";
+import MainLayout from "./layouts/MainLayout";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 function App() {
   return (
