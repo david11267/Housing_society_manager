@@ -9,7 +9,6 @@ import {
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { data, type FakeData } from "@/types";
-import CrudDialog from "./crudDialog";
 import FormDialog from "./formDialog";
 import { Button } from "./ui/button";
 
@@ -86,7 +85,14 @@ export default function DataTable() {
   return (
     <div className="max-h-[50rem] overflow-y-auto">
       <div className="space-x-4 space-y-4">
-        <Button> Add Row</Button>
+        <Button
+          onClick={() => {
+            setSelectedRow(null);
+            setOpen(true);
+          }}>
+          {" "}
+          Add Row
+        </Button>
         <input
           value={table.getState().globalFilter}
           onChange={(e) => table.setGlobalFilter(String(e.target.value))}
