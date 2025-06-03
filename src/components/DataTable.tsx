@@ -72,7 +72,7 @@ const columns = [
 
 export default function DataTable() {
   const [open, setOpen] = React.useState(false);
-  const [selectedRow, setSelectedRow] = React.useState<FakeData | null>(null);
+  const [selectedRow, setSelectedRow] = React.useState<FakeData | undefined>();
 
   const table = useReactTable({
     data,

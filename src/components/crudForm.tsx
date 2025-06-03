@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import NotesAndComments from "./notesAndComments";
 import type { FakeData } from "@/types";
 
-export const formSchema = z.object({
+const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   address: z.string().min(5, { message: "Address must be at least 5 characters." }),
   builtYear: z.date(),
@@ -159,7 +159,11 @@ export function CrudFrom({ data }: Props) {
               <FormItem>
                 <FormLabel>Last note drop date</FormLabel>
                 <FormControl>
-                  <Input type="datetime-local" value={field.value ? toDateTimeLocalString(field.value) : ""} />
+                  <Input
+                    type="datetime-local"
+                    value={field.value ? toDateTimeLocalString(field.value) : ""}
+                    onChange={(e) => field.onChange(e.target.value ? new Date(e.target.value) : null)}
+                  />
                 </FormControl>
 
                 <FormMessage />
@@ -230,7 +234,16 @@ export function CrudFrom({ data }: Props) {
           <span>Last update: </span>
         </div>
         <NotesAndComments notes={data?.notes} />
-        {data ?  <Button type="submit">Update</Button>: <Button type="submit">Submit</Button>}
+        {data ? (
+          <>
+            <Button type="submit">Update</Button>
+            <Button variant={"destructive"} type="submit">
+              Delete
+            </Button>
+          </>
+        ) : (
+          <Button type="submit">Submit</Button>
+        )}
       </form>
     </Form>
   );

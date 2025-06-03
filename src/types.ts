@@ -1,4 +1,5 @@
 export type FakeData = {
+  id: string;
   name: string;
   address: string;
   builtYear: number;
@@ -25,6 +26,7 @@ export type Note = {
 
 export const data: FakeData[] = [
   {
+    id: "1",
     name: "Central Heights",
     address: "Södra Vägen 12, Göteborg",
     builtYear: 1990,
@@ -61,6 +63,7 @@ export const data: FakeData[] = [
     ],
   },
   {
+    id: "2",
     name: "Lindhagen Point",
     address: "Kungsholmsgatan 45, Stockholm",
     builtYear: 2001,
@@ -90,6 +93,7 @@ export const data: FakeData[] = [
     ],
   },
   {
+    id: "3",
     name: "Vasastan Towers",
     address: "Odengatan 77, Stockholm",
     builtYear: 1985,
@@ -114,6 +118,7 @@ export const data: FakeData[] = [
     ],
   },
   {
+    id: "4",
     name: "Solna View",
     address: "Solnavägen 100, Solna",
     builtYear: 2005,
