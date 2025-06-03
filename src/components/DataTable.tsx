@@ -10,7 +10,7 @@ import {
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { data, type FakeData } from "@/types";
 import { Button } from "./ui/button";
-import FormDialog from "@/components/FormDialog";
+import FormDialog from "./FormDialog";
 
 const columnHelper = createColumnHelper<FakeData>();
 
