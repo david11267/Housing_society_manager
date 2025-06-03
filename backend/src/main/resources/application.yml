@@ -1,0 +1,30 @@
+debug: true
+server:
+  port: 3000
+
+spring:
+  application:
+    name: app
+  datasource:
+    url: jdbc:postgresql://aws-0-eu-north-1.pooler.supabase.com:6543/postgres
+    username: postgres.xnmokrfuddherzaikxsi
+    password: zD4GysuXIVku8uPz
+
+    jpa:
+      hibernate:
+        ddl-auto: create-drop
+      defer-datasource-initialization: true
+
+      sql:
+        init:
+          platform: postgresql
+          mode: always
+      output:
+        ansi:
+          enabled: always
+    logging:
+      level:
+        org:
+          springframework:
+            boot:
+              autoconfigure: ERROR
