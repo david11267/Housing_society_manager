@@ -36,11 +36,10 @@ export const formSchema = z.object({
 });
 
 type Props = {
-  formType: "add" | "update";
   data?: FakeData;
 };
 
-export function CrudFrom({ formType, data }: Props) {
+export function CrudFrom({ data }: Props) {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -231,7 +230,7 @@ export function CrudFrom({ formType, data }: Props) {
           <span>Last update: </span>
         </div>
         <NotesAndComments notes={data?.notes} />
-        {formType === "add" ? <Button type="submit">Submit</Button> : <Button type="submit">Update</Button>}
+        {data ?  <Button type="submit">Update</Button>: <Button type="submit">Submit</Button>}
       </form>
     </Form>
   );

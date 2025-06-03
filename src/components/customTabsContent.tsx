@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 type Props = {
-  notes: Note[];
+  notes?: Note[];
   contentName: string;
 };
 export default function CustomTabsContent({ notes, contentName }: Props) {
@@ -16,7 +16,7 @@ export default function CustomTabsContent({ notes, contentName }: Props) {
         Add {contentName}
       </Button>
       <ScrollArea className="h-[25rem] w-full rounded-md border p-4">
-        {notes.map((n) => (
+        {notes?.map((n) => (
           <Accordion type="single" collapsible>
             <AccordionItem value="item-1">
               <AccordionTrigger className="cursor-pointer">

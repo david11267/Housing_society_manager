@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 type Props = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedRow: FakeData | null;
+  selectedRow?: FakeData;
 };
 export default function FormDialog({ open, setOpen, selectedRow }: Props) {
   return (
@@ -12,7 +12,7 @@ export default function FormDialog({ open, setOpen, selectedRow }: Props) {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Row Details</DialogTitle>
-          {selectedRow && <CrudFrom formType="update" data={selectedRow} />}
+          <CrudFrom data={selectedRow} />
         </DialogHeader>
       </DialogContent>
     </Dialog>

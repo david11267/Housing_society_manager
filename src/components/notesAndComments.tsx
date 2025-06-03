@@ -5,12 +5,12 @@ import { Textarea } from "./ui/textarea";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CustomTabsContent from "./customTabsContent";
 type Props = {
-  notes: Note[];
+  notes: Note[] | undefined;
 };
 export default function NotesAndComments({ notes }: Props) {
-  const comments = notes.filter((n) => n.type === "comment");
-  const complaints = notes.filter((n) => n.type === "complaint");
-  const todo = notes.filter((n) => n.type === "todo");
+  const comments = notes?.filter((n) => n.type === "comment");
+  const complaints = notes?.filter((n) => n.type === "complaint");
+  const todo = notes?.filter((n) => n.type === "todo");
 
   return (
     <div className="space-y-4">
