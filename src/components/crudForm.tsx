@@ -14,7 +14,7 @@ import type { FakeData } from "@/types";
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   address: z.string().min(5, { message: "Address must be at least 5 characters." }),
-  builtYear: z.date(),
+  builtYear: z.number({ message: "year must be a four digit number" }).positive().min(1000).max(2100),
   nrOfApartments: z.number().int().min(1, { message: "Must have at least 1 apartment." }),
   lastNotesDrop: z.date({
     required_error: "Last notes drop date is required.",
@@ -48,7 +48,7 @@ export function CrudFrom({ data }: Props) {
       ? {
           name: data.name,
           address: data.address,
-          builtYear: data.builtYear ? new Date(data.builtYear) : new Date(),
+          builtYear: data.builtYear,
           nrOfApartments: data.nrOfApartments,
           lastNotesDrop: data.lastNotesDrop ? new Date(data.lastNotesDrop) : new Date(),
           lastUpdated: data.lastUpdated ? new Date(data.lastUpdated) : new Date(),
@@ -63,7 +63,7 @@ export function CrudFrom({ data }: Props) {
       : {
           name: "",
           address: "",
-          builtYear: new Date(),
+          builtYear: 2000,
           nrOfApartments: 1,
           lastNotesDrop: new Date(),
           lastUpdated: new Date(),
@@ -126,12 +126,13 @@ export function CrudFrom({ data }: Props) {
             name="builtYear"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Built</FormLabel>
+                <FormLabel>Built year</FormLabel>
                 <FormControl>
                   <Input
-                    type="datetime-local"
-                    value={field.value ? toDateTimeLocalString(field.value) : ""}
-                    onChange={(e) => field.onChange(e.target.value ? new Date(e.target.value) : null)}
+                    type="number"
+                    placeholder="ex: 1990"
+                    value={field.value ?? ""}
+                    onChange={(e) => field.onChange(e.target.value ? Number(e.target.value) : "")}
                   />
                 </FormControl>
                 <FormMessage />
@@ -145,9 +146,13 @@ export function CrudFrom({ data }: Props) {
               <FormItem>
                 <FormLabel>Apartments amount</FormLabel>
                 <FormControl>
-                  <Input type="number" placeholder="ex: 43" {...field} />
+                  <Input
+                    type="number"
+                    placeholder="ex: 43"
+                    value={field.value ?? ""}
+                    onChange={(e) => field.onChange(e.target.value ? Number(e.target.value) : "")}
+                  />
                 </FormControl>
-
                 <FormMessage />
               </FormItem>
             )}
