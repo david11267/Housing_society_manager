@@ -1,6 +1,6 @@
 import type { FakeData } from "@/types";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
-import { CrudFrom } from "./CrudForm";
+import { CrudFrom } from "@/components/CrudForm";
 type Props = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
