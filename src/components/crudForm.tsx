@@ -22,7 +22,7 @@ const formSchema = z.object({
   lastUpdated: z.date({ required_error: "Last updated date is required." }),
   registeredPhoneNumbers: z.number().int().min(0, { message: "Must be zero or more registered phone numbers." }),
   portCode: z.object({
-    code: z.string().regex(/^\d{4}$/, { message: "Port code must be a 4-digit number." }),
+    code: z.string(),
     status: z.enum(["working", "broken", "changed", "other"], {
       required_error: "Status must be 'active' or 'inactive'.",
     }),

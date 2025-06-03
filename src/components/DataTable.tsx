@@ -84,6 +84,8 @@ export default function DataTable() {
 
   return (
     <div className="max-h-[50rem] overflow-y-auto">
+      <FormDialog open={open} selectedRow={selectedRow} setOpen={setOpen} />
+
       <div className="space-x-4 space-y-4">
         <Button
           onClick={() => {
@@ -127,8 +129,6 @@ export default function DataTable() {
           ))}
         </TableBody>
       </Table>
-
-      <FormDialog open={open} selectedRow={selectedRow} setOpen={setOpen} />
     </div>
   );
 }
