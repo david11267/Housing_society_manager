@@ -77,11 +77,9 @@ export function CrudFrom({ data }: Props) {
         },
   });
   // Converts a Date to "YYYY-MM-DDTHH:MM" format
-  function toDateTimeLocalString(date: Date): string {
+  function toDateLocalString(date: Date): string {
     const pad = (n: number) => n.toString().padStart(2, "0");
-    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(
-      date.getMinutes()
-    )}`;
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
   }
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -166,12 +164,11 @@ export function CrudFrom({ data }: Props) {
                 <FormLabel>Last note drop date</FormLabel>
                 <FormControl>
                   <Input
-                    type="datetime-local"
-                    value={field.value ? toDateTimeLocalString(field.value) : ""}
+                    type="date"
+                    value={field.value ? toDateLocalString(field.value) : ""}
                     onChange={(e) => field.onChange(e.target.value ? new Date(e.target.value) : null)}
                   />
                 </FormControl>
-
                 <FormMessage />
               </FormItem>
             )}
