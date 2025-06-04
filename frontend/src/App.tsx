@@ -1,10 +1,16 @@
-import { SignedIn, SignedOut, SignIn } from "@clerk/clerk-react";
-import MainLayout from "./layouts/MainLayout";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { SignedIn, SignedOut, SignIn } from '@clerk/clerk-react';
+import MainLayout from './layouts/MainLayout';
+import { ThemeProvider } from '@/components/ThemeProvider';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools />
+
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <SignedOut>
           <div className="flex justify-center h-svh items-center ">
@@ -15,7 +21,7 @@ function App() {
           <MainLayout />
         </SignedIn>
       </ThemeProvider>
-    </>
+    </QueryClientProvider>
   );
 }
 

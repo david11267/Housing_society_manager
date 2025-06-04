@@ -9,15 +9,15 @@ export type FakeData = {
   lastUpdated: Date;
   portCode: {
     code: string;
-    status: "working" | "broken" | "changed" | "other";
-    accessibility: "easy" | "medium" | "hard";
+    status: 'working' | 'broken' | 'changed' | 'other';
+    accessibility: 'easy' | 'medium' | 'hard';
     lastUpdate: Date;
   };
   notes: Note[];
 };
 
 export type Note = {
-  type: "complaint" | "comment" | "todo";
+  type: 'complaint' | 'comment' | 'todo';
   header: string;
   note: string;
   lastUpdated: Date;
@@ -26,118 +26,118 @@ export type Note = {
 
 export const data: FakeData[] = [
   {
-    id: "1",
-    name: "Central Heights",
-    address: "Södra Vägen 12, Göteborg",
+    id: '1',
+    name: 'Central Heights',
+    address: 'Södra Vägen 12, Göteborg',
     builtYear: 1990,
     nrOfApartments: 42,
-    lastNotesDrop: new Date("2025-05-15T14:23:00"),
+    lastNotesDrop: new Date('2025-05-15T14:23:00'),
     registeredPhoneNumbers: 12,
-    lastUpdated: new Date("2025-05-30T10:11:00"),
+    lastUpdated: new Date('2025-05-30T10:11:00'),
     portCode: {
-      code: "1234",
-      status: "working",
-      accessibility: "easy",
-      lastUpdate: new Date("2025-05-25T09:15:00"),
+      code: '1234',
+      status: 'working',
+      accessibility: 'easy',
+      lastUpdate: new Date('2025-05-25T09:15:00'),
     },
     notes: [
       {
-        type: "complaint",
-        header: "Noise issue",
-        note: "Complaints about loud music from apartment 5C.",
-        lastUpdated: new Date("2025-06-02T11:30:00"),
+        type: 'complaint',
+        header: 'Noise issue',
+        note: 'Complaints about loud music from apartment 5C.',
+        lastUpdated: new Date('2025-06-02T11:30:00'),
       },
       {
-        type: "todo",
-        header: "Inspect elevator",
-        note: "Elevator maintenance required.",
-        lastUpdated: new Date("2025-06-03T09:00:00"),
-        dueDateTime: new Date("2025-06-05T12:00:00"),
+        type: 'todo',
+        header: 'Inspect elevator',
+        note: 'Elevator maintenance required.',
+        lastUpdated: new Date('2025-06-03T09:00:00'),
+        dueDateTime: new Date('2025-06-05T12:00:00'),
       },
       {
-        type: "comment",
-        header: "Garden",
-        note: "Residents appreciate the new garden benches.",
-        lastUpdated: new Date("2025-06-04T10:00:00"),
+        type: 'comment',
+        header: 'Garden',
+        note: 'Residents appreciate the new garden benches.',
+        lastUpdated: new Date('2025-06-04T10:00:00'),
       },
     ],
   },
   {
-    id: "2",
-    name: "Lindhagen Point",
-    address: "Kungsholmsgatan 45, Stockholm",
+    id: '2',
+    name: 'Lindhagen Point',
+    address: 'Kungsholmsgatan 45, Stockholm',
     builtYear: 2001,
     nrOfApartments: 60,
-    lastNotesDrop: new Date("2025-05-20T08:45:00"),
+    lastNotesDrop: new Date('2025-05-20T08:45:00'),
     registeredPhoneNumbers: 8,
-    lastUpdated: new Date("2025-05-29T16:42:00"),
+    lastUpdated: new Date('2025-05-29T16:42:00'),
     portCode: {
-      code: "5678",
-      status: "broken",
-      accessibility: "medium",
-      lastUpdate: new Date("2025-05-28T13:00:00"),
+      code: '5678',
+      status: 'broken',
+      accessibility: 'medium',
+      lastUpdate: new Date('2025-05-28T13:00:00'),
     },
     notes: [
       {
-        type: "comment",
-        header: "Lobby",
-        note: "Lobby repainting scheduled.",
-        lastUpdated: new Date("2025-06-05T10:00:00"),
+        type: 'comment',
+        header: 'Lobby',
+        note: 'Lobby repainting scheduled.',
+        lastUpdated: new Date('2025-06-05T10:00:00'),
       },
       {
-        type: "complaint",
-        header: "Elevator",
-        note: "Elevator out of service frequently.",
-        lastUpdated: new Date("2025-06-06T09:00:00"),
+        type: 'complaint',
+        header: 'Elevator',
+        note: 'Elevator out of service frequently.',
+        lastUpdated: new Date('2025-06-06T09:00:00'),
       },
     ],
   },
   {
-    id: "3",
-    name: "Vasastan Towers",
-    address: "Odengatan 77, Stockholm",
+    id: '3',
+    name: 'Vasastan Towers',
+    address: 'Odengatan 77, Stockholm',
     builtYear: 1985,
     nrOfApartments: 55,
-    lastNotesDrop: new Date("2025-05-18T12:00:00"),
+    lastNotesDrop: new Date('2025-05-18T12:00:00'),
     registeredPhoneNumbers: 15,
-    lastUpdated: new Date("2025-05-28T09:30:00"),
+    lastUpdated: new Date('2025-05-28T09:30:00'),
     portCode: {
-      code: "9101",
-      status: "changed",
-      accessibility: "hard",
-      lastUpdate: new Date("2025-05-27T11:00:00"),
+      code: '9101',
+      status: 'changed',
+      accessibility: 'hard',
+      lastUpdate: new Date('2025-05-27T11:00:00'),
     },
     notes: [
       {
-        type: "todo",
-        header: "Window cleaning",
-        note: "Schedule window cleaning for all floors.",
-        lastUpdated: new Date("2025-06-08T13:00:00"),
-        dueDateTime: new Date("2025-06-15T09:00:00"),
+        type: 'todo',
+        header: 'Window cleaning',
+        note: 'Schedule window cleaning for all floors.',
+        lastUpdated: new Date('2025-06-08T13:00:00'),
+        dueDateTime: new Date('2025-06-15T09:00:00'),
       },
     ],
   },
   {
-    id: "4",
-    name: "Solna View",
-    address: "Solnavägen 100, Solna",
+    id: '4',
+    name: 'Solna View',
+    address: 'Solnavägen 100, Solna',
     builtYear: 2005,
     nrOfApartments: 70,
-    lastNotesDrop: new Date("2025-05-25T09:00:00"),
+    lastNotesDrop: new Date('2025-05-25T09:00:00'),
     registeredPhoneNumbers: 20,
-    lastUpdated: new Date("2025-05-27T14:10:00"),
+    lastUpdated: new Date('2025-05-27T14:10:00'),
     portCode: {
-      code: "8765",
-      status: "other",
-      accessibility: "easy",
-      lastUpdate: new Date("2025-05-26T10:00:00"),
+      code: '8765',
+      status: 'other',
+      accessibility: 'easy',
+      lastUpdate: new Date('2025-05-26T10:00:00'),
     },
     notes: [
       {
-        type: "complaint",
-        header: "Parking",
-        note: "Unauthorized cars in guest parking.",
-        lastUpdated: new Date("2025-06-16T09:00:00"),
+        type: 'complaint',
+        header: 'Parking',
+        note: 'Unauthorized cars in guest parking.',
+        lastUpdated: new Date('2025-06-16T09:00:00'),
       },
     ],
   },
