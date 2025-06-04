@@ -1,4 +1,4 @@
-package Housing_society_manager.app;
+package se.davidaslan.housingsocietymanager.app;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

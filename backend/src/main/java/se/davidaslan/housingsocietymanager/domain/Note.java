@@ -1,4 +1,5 @@
-package domain;
+/*
+package se.davidaslan.housingsocietymanager.domain;
 
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -16,3 +17,4 @@ public class Note {
     @JoinColumn(name = "cart_id")
     private HousingSociety housingSociety;
 }
+*/

@@ -1,4 +1,5 @@
-package domain;
+/*
+package se.davidaslan.housingsocietymanager.domain;
 
 import jakarta.persistence.*;
 
@@ -22,3 +23,4 @@ public class HousingSociety {
     private List<Note> notes;
 
 }
+*/

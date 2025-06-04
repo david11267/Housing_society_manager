@@ -1,8 +1,19 @@
-debug: true
+debug: false
 server:
   port: 3000
 
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # Trailing slash is required in this case!
+          # In others it's prohibited!
+          # Make sure you double check your case
+          issuer-uri: https://joint-woodcock-98.clerk.accounts.dev
+          audiences: my-audience-name
+
+
   application:
     name: app
   datasource:
