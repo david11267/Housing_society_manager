@@ -7,6 +7,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.web.bind.annotation.*;
 import se.davidaslan.housingsocietymanager.domain.HousingSociety.HousingSociety;
 import se.davidaslan.housingsocietymanager.domain.HousingSociety.HousingSocietyService;
+import se.davidaslan.housingsocietymanager.dtos.HousingSocietyDto;
 
 import java.util.List;
 
@@ -28,8 +29,10 @@ public class Controller {
         return hsService.getAll(userId);
     }
 
-    @PutMapping
-    String update(Authentication user){
+    @PostMapping
+    String post(Authentication user, @RequestBody HousingSocietyDto dto){
+        String userId= getUserIdFromAuth(user);
+        dto.toDomain(userId);
         return user.isAuthenticated() ? "They are!" : "They are not T_T";
     }
 

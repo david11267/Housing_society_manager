@@ -9,7 +9,6 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 import type { HousingSociety } from "@/types";
-import NotesAndComments from "./NotesAndComments";
 import React from "react";
 import { usePostHS } from "@/hooks/useApiWithUser";
 
@@ -207,6 +206,43 @@ export function CrudFrom({ data }: Props) {
 
           <FormField
             control={form.control}
+            name="registeredPhoneNumbers"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Registered Phone Numbers</FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    {...field}
+                    value={field.value ?? ""}
+                    onChange={(e) => field.onChange(e.target.value ? Number(e.target.value) : "")}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="lastUpdated"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Last Updated</FormLabel>
+                <FormControl>
+                  <Input
+                    type="date"
+                    value={field.value ? toDateLocalString(field.value) : ""}
+                    onChange={(e) => field.onChange(e.target.value ? new Date(e.target.value) : null)}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
             name="port.code"
             render={({ field }) => (
               <FormItem>
@@ -261,6 +297,23 @@ export function CrudFrom({ data }: Props) {
                   </SelectContent>
                 </Select>
 
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="port.lastUpdate"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Port Last Update</FormLabel>
+                <FormControl>
+                  <Input
+                    type="date"
+                    value={field.value ? toDateLocalString(field.value) : ""}
+                    onChange={(e) => field.onChange(e.target.value ? new Date(e.target.value) : null)}
+                  />
+                </FormControl>
                 <FormMessage />
               </FormItem>
             )}

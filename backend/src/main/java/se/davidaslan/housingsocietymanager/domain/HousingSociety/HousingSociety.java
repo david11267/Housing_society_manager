@@ -32,4 +32,24 @@ public class HousingSociety {
     private PortCode port;
     @OneToMany(mappedBy = "housingSociety", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Note> notes;
+
+    public HousingSociety(String userId, String name, String address, int builtYear, int nrOfApartments,
+                          LocalDateTime lastNotesDrop, int registeredPhoneNumbers, LocalDateTime lastUpdated,
+                          PortCode port, List<Note> notes) {
+        this.userId = userId;
+        this.name = name;
+        this.address = address;
+        this.builtYear = builtYear;
+        this.nrOfApartments = nrOfApartments;
+        this.lastNotesDrop = lastNotesDrop;
+        this.registeredPhoneNumbers = registeredPhoneNumbers;
+        this.lastUpdated = lastUpdated;
+        this.port = port;
+        this.notes = notes;
+    }
+
+
+    public HousingSociety() {
+
+    }
 }

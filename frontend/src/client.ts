@@ -3,7 +3,7 @@ import { type HousingSociety } from "./types";
 const BASE_URL = "http://localhost:8080/api";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const postHS = async (data: any, token: string) => {
+export const postHS = async (data: HousingSociety, token: string) => {
   const res = await fetch(`${BASE_URL}`, {
     method: "POST",
     headers: {
