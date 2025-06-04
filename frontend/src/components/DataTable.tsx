@@ -15,11 +15,11 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { data, type FakeData } from '@/types';
+import { type HsData } from '@/types';
 import FormDialog from './FormDialog';
 import TableModifiers from './TableModifiers';
 
-const columnHelper = createColumnHelper<FakeData>();
+const columnHelper = createColumnHelper<HsData>();
 
 const columns = [
   columnHelper.accessor('name', {
@@ -78,11 +78,11 @@ const columns = [
 ];
 
 type Props = {
-  selectedRow: FakeData | undefined;
-  setSelectedRow: React.Dispatch<React.SetStateAction<FakeData | undefined>>;
+  selectedRow: HsData | undefined;
+  setSelectedRow: React.Dispatch<React.SetStateAction<HsData | undefined>>;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  handleFormSubmit(method: 'create' | 'update' | 'delete'): void;
+  data: HsData[];
 };
 
 export default function DataTable({
@@ -90,7 +90,7 @@ export default function DataTable({
   setSelectedRow,
   open,
   setOpen,
-  handleFormSubmit,
+  data,
 }: Props) {
   const table = useReactTable({
     data,
@@ -105,7 +105,6 @@ export default function DataTable({
       <FormDialog open={open} selectedRow={selectedRow} setOpen={setOpen} />
 
       <TableModifiers
-        handleFormSubmit={handleFormSubmit}
         open={open}
         setOpen={setOpen}
         setSelectedRow={setSelectedRow}

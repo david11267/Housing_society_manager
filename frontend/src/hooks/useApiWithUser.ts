@@ -1,34 +1,30 @@
 import { getHS, postHS } from '@/client';
-import { data } from '@/types';
-import { useUser } from '@clerk/clerk-react';
+import { type HsData } from '@/types';
+import { useAuth } from '@clerk/clerk-react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 export function useGetHS() {
-  const { user } = useUser();
+  const { getToken } = useAuth();
 
-  useQuery({
+  return useQuery({
     queryKey: ['housingSocieties'],
     queryFn: async () => {
-      if (!user) return new Error('no user ');
-      const response = await getHS(user.id);
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
+      const token = await getToken();
+      if (token) return getHS(token);
     },
   });
 }
 
 export function usePostHS() {
-  const { user } = useUser();
+  const { getToken } = useAuth();
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationKey: ['housingSocieties'],
-    mutationFn: async () => {
-      if (!user) return new Error('no user ');
-      await postHS(data, user.id);
+    mutationFn: async (data: HsData) => {
+      const token = await getToken();
+      if (token) return postHS(data, token);
     },
     onError: e => alert('Error: ' + e),
     onSuccess: () => {

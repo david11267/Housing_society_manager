@@ -1,4 +1,4 @@
-export type FakeData = {
+export type HsData = {
   id: string;
   name: string;
   address: string;
@@ -24,7 +24,7 @@ export type Note = {
   dueDateTime?: Date;
 };
 
-export const data: FakeData[] = [
+export const fakeData: HsData[] = [
   {
     id: '1',
     name: 'Central Heights',
