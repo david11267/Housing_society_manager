@@ -29,6 +29,9 @@ public class HousingSocietyService {
     }
 
 
+
+
+
     public ResponseEntity<HousingSocietyDto> update(HousingSociety hs, String userId) {
         // Fetch the original record from the repository
         hs.setUserId(userId);
@@ -46,6 +49,12 @@ public class HousingSocietyService {
 
         // Return the response with status 200 and updated data
         return ResponseEntity.status(HttpStatus.OK).body(dtoResp);
+    }
+
+
+    public ResponseEntity<HousingSocietyDto> delete(HousingSociety hs) {
+       repo.delete(hs);
+        return ResponseEntity.status(HttpStatus.OK).body(HousingSocietyDto.toDto(hs));
     }
 
 }

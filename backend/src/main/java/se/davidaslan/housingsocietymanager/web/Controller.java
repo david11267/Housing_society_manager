@@ -44,6 +44,12 @@ public class Controller {
         return hsService.update(hs,userId);
     }
 
+    @DeleteMapping
+    ResponseEntity<HousingSocietyDto> delete(Authentication user, @RequestBody HousingSociety hs){
+        String userId= getUserIdFromAuth(user);
+        return hsService.delete(hs);
+    }
+
 
     private String getUserIdFromAuth(Authentication user){
         Jwt jwt = ((JwtAuthenticationToken)user).getToken();

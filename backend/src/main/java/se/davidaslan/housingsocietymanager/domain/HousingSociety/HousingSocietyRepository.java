@@ -26,4 +26,8 @@ public class HousingSocietyRepository {
     public HousingSociety get(UUID hsId){
         return db.findHousingSocietiesByUuid(hsId);
     }
+
+    public void delete(HousingSociety hs) {
+        db.delete(hs);
+    }
 }

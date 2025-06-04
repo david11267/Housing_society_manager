@@ -12,7 +12,7 @@ export default function FormDialog({ open, setOpen, selectedRow }: Props) {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Row Details</DialogTitle>
-          <CrudFrom data={selectedRow} />
+          <CrudFrom setOpen={setOpen} data={selectedRow} />
         </DialogHeader>
       </DialogContent>
     </Dialog>

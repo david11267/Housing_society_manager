@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 import type { HousingSociety } from "@/types";
 import React from "react";
-import { usePostHS, usePutHS } from "@/hooks/useApiWithUser";
+import { useDeleteHS, usePostHS, usePutHS } from "@/hooks/useApiWithUser";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -48,11 +48,13 @@ const formSchema = z.object({
 
 type Props = {
   data?: HousingSociety;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export function CrudFrom({ data }: Props) {
+export function CrudFrom({ data, setOpen }: Props) {
   const { mutate: createHS } = usePostHS();
   const { mutate: updateHS } = usePutHS();
+  const { mutate: deleteHS } = useDeleteHS();
   const [action, setAction] = React.useState<"submit" | "update" | "delete">("submit");
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -110,13 +112,13 @@ export function CrudFrom({ data }: Props) {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     if (action === "update") {
-      // Merge the id from data into the payload
       updateHS({ ...values, uuid: data?.uuid } as HousingSociety);
     } else if (action === "delete") {
-      // handle delete
+      deleteHS({ ...values, uuid: data?.uuid } as HousingSociety);
     } else {
       createHS(values as HousingSociety);
     }
+    setOpen(false);
   }
 
   return (

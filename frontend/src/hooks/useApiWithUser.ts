@@ -1,4 +1,4 @@
-import { getHS, postHS, putHS } from "@/client";
+import { deleteHS, getHS, postHS, putHS } from "@/client";
 import { type HousingSociety } from "@/types";
 import { useAuth } from "@clerk/clerk-react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -47,6 +47,24 @@ export function usePutHS() {
     onError: (e) => alert("Error: " + e),
     onSuccess: () => {
       toast("Updated developer");
+      queryClient.invalidateQueries({ queryKey: ["housingSocieties"] });
+    },
+  });
+}
+
+export function useDeleteHS() {
+  const { getToken } = useAuth();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: ["housingSocieties"],
+    mutationFn: async (data: HousingSociety) => {
+      const token = await getToken();
+      if (token) return deleteHS(data, token);
+    },
+    onError: (e) => alert("Error: " + e),
+    onSuccess: () => {
+      toast("Deleted developer");
       queryClient.invalidateQueries({ queryKey: ["housingSocieties"] });
     },
   });

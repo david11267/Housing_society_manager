@@ -37,3 +37,15 @@ export const getHS = async (token: string): Promise<HousingSociety[]> => {
   });
   return res.json();
 };
+
+export const deleteHS = async (data: HousingSociety, token: string) => {
+  const res = await fetch(`${BASE_URL}`, {
+    method: "Delete",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return res.json();
+};
