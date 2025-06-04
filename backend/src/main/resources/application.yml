@@ -1,41 +1,26 @@
-debug: false
-server:
-  port: 3000
-
 spring:
+  application:
+    name: housing-society-manger
   security:
     oauth2:
       resourceserver:
         jwt:
-          # Trailing slash is required in this case!
-          # In others it's prohibited!
-          # Make sure you double check your case
-          issuer-uri: https://joint-woodcock-98.clerk.accounts.dev
-          audiences: my-audience-name
-
-
-  application:
-    name: app
+          issuer-uri: ${JWT_PROVIDER_URI}
   datasource:
-    url: jdbc:postgresql://aws-0-eu-north-1.pooler.supabase.com:6543/postgres
-    username: postgres.xnmokrfuddherzaikxsi
-    password: zD4GysuXIVku8uPz
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASS}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      data-source-properties:
+        cachePrepStmts: false
 
-    jpa:
-      hibernate:
-        ddl-auto: create-drop
-      defer-datasource-initialization: true
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    defer-datasource-initialization: true
 
-      sql:
-        init:
-          platform: postgresql
-          mode: always
-      output:
-        ansi:
-          enabled: always
-    logging:
-      level:
-        org:
-          springframework:
-            boot:
-              autoconfigure: ERROR
+  sql:
+    init:
+      platform: postgresql
+      mode: always
