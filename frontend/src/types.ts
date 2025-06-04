@@ -7,7 +7,7 @@ export type PortCode = {
 
 export type Note = {
   uuid: string;
-  type: string;
+  type: "comment" | "complaint" | "todo";
   header: string;
   note: string;
   lastUpdated: Date;
@@ -46,7 +46,7 @@ export const fakeData: HousingSociety[] = [
     notes: [
       {
         uuid: "3f5b3a2a-ab2d-47b2-a33b-eba6c2399f11",
-        type: "Info",
+        type: "comment",
         header: "Maintenance Update",
         note: "The maintenance will be conducted next week.",
         lastUpdated: new Date("2025-05-28T09:00:00Z"),
@@ -54,7 +54,7 @@ export const fakeData: HousingSociety[] = [
       },
       {
         uuid: "7e9a6e8d-ccda-42ff-92f0-dbc3c95df23a",
-        type: "Alert",
+        type: "complaint",
         header: "Power Outage",
         note: "There will be a power outage tomorrow from 10AM to 12PM.",
         lastUpdated: new Date("2025-05-29T08:00:00Z"),
@@ -80,7 +80,7 @@ export const fakeData: HousingSociety[] = [
     notes: [
       {
         uuid: "9a4e6c1b-8f7c-4de1-ae22-123456789abc",
-        type: "Info",
+        type: "todo",
         header: "Elevator Repair",
         note: "Elevator will be out of service for 3 days.",
         lastUpdated: new Date("2025-05-24T13:00:00Z"),
@@ -123,7 +123,7 @@ export const fakeData: HousingSociety[] = [
     notes: [
       {
         uuid: "abcd1234-5678-90ef-ghij-klmnopqrstuv",
-        type: "Alert",
+        type: "complaint",
         header: "Water Supply Issue",
         note: "Water supply will be shut down from 9AM to 5PM.",
         lastUpdated: new Date("2025-05-17T10:00:00Z"),
@@ -131,7 +131,7 @@ export const fakeData: HousingSociety[] = [
       },
       {
         uuid: "wxyz5678-1234-abcd-efgh-ijklmnopqrstu",
-        type: "Info",
+        type: "comment",
         header: "Parking Lot Renovation",
         note: "Renovation scheduled next month.",
         lastUpdated: new Date("2025-05-15T09:00:00Z"),
@@ -139,7 +139,7 @@ export const fakeData: HousingSociety[] = [
       },
       {
         uuid: "mnop3456-7890-abcd-efgh-ijklqrstuvwx",
-        type: "Reminder",
+        type: "todo",
         header: "Annual Meeting",
         note: "Don’t forget the annual meeting on June 10th.",
         lastUpdated: new Date("2025-05-10T08:00:00Z"),
@@ -165,7 +165,7 @@ export const fakeData: HousingSociety[] = [
     notes: [
       {
         uuid: "note1234-5678-abcd-efgh-ijklmnopqrst",
-        type: "Info",
+        type: "todo",
         header: "Garden Maintenance",
         note: "Gardens will be trimmed this weekend.",
         lastUpdated: new Date("2025-05-21T09:00:00Z"),
