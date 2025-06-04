@@ -5,13 +5,13 @@ export type PortCode = {
   lastUpdate: Date;
 };
 
-export type Note = {
+type Note = {
   uuid: string;
   type: "comment" | "complaint" | "todo";
   header: string;
   note: string;
-  lastUpdated: Date;
-  dueDateTime?: Date | null;
+  lastUpdated?: Date;
+  dueDateTime: Date | null;
 };
 
 export type HousingSociety = {

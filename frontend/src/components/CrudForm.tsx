@@ -35,6 +35,16 @@ const formSchema = z.object({
       required_error: "Port code last update is required.",
     }),
   }),
+  notes: z.array(
+    z.object({
+      uuid: z.string(),
+      type: z.string(),
+      header: z.string(),
+      note: z.string(),
+      lastUpdated: z.date().optional(),
+      dueDateTime: z.date().nullable(),
+    })
+  ),
 });
 
 type Props = {
@@ -62,6 +72,18 @@ export function CrudFrom({ data }: Props) {
             accessibility: data.port.accessibility,
             lastUpdate: data.port.lastUpdate ? new Date(data.port.lastUpdate) : new Date(),
           },
+          notes:
+            data.notes?.map((n) => ({
+              uuid: n.uuid,
+              type: (["comment", "complaint", "todo"].includes(n.type) ? n.type : "comment") as
+                | "comment"
+                | "complaint"
+                | "todo",
+              header: n.header,
+              note: n.note,
+              lastUpdated: n.lastUpdated ? new Date(n.lastUpdated) : undefined,
+              dueDateTime: n.dueDateTime ? new Date(n.dueDateTime) : null,
+            })) ?? [],
         }
       : {
           name: "",
@@ -77,6 +99,7 @@ export function CrudFrom({ data }: Props) {
             accessibility: "easy",
             lastUpdate: new Date(),
           },
+          notes: [],
         },
   });
   function toDateLocalString(date: Date): string {
@@ -244,7 +267,7 @@ export function CrudFrom({ data }: Props) {
           />
           <span>Last update: </span>
         </div>
-        <NotesAndComments notes={data?.notes} />
+        <NotesAndComments notes={form.getValues("notes") ?? []} />
         {data ? (
           <>
             <Button type="submit" onClick={() => setAction("update")}>
