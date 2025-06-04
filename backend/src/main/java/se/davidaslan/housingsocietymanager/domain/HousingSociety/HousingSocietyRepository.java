@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class HousingSocietyRepository {
@@ -20,5 +21,9 @@ public class HousingSocietyRepository {
 
     public List<HousingSociety> getAll(String userId){
         return db.findByUserId(userId);
+    }
+
+    public HousingSociety get(UUID hsId){
+        return db.findHousingSocietiesByUuid(hsId);
     }
 }

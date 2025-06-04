@@ -8,9 +8,11 @@ import se.davidaslan.housingsocietymanager.domain.PortCode;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 public record HousingSocietyDto(
         @JsonProperty("name") String name,
+        @JsonProperty("uuid") UUID uuid,
         @JsonProperty("address") String address,
         @JsonProperty("builtYear") Integer builtYear,
         @JsonProperty("nrOfApartments") Integer nrOfApartments,
@@ -22,8 +24,9 @@ public record HousingSocietyDto(
 
 ) {
     @JsonCreator
-    public HousingSocietyDto(@JsonProperty("name") String name, @JsonProperty("address") String address, @JsonProperty("builtYear") Integer builtYear, @JsonProperty("nrOfApartments") Integer nrOfApartments, @JsonProperty("lastNotesDrop") LocalDateTime lastNotesDrop, @JsonProperty("registeredPhoneNumbers") Integer registeredPhoneNumbers, @JsonProperty("lastUpdated") LocalDateTime lastUpdated, @JsonProperty("port") PortCode port, @JsonProperty("notes") List<Note> notes) {
+    public HousingSocietyDto(@JsonProperty("name") String name, @JsonProperty("uuid") UUID uuid, @JsonProperty("address") String address, @JsonProperty("builtYear") Integer builtYear, @JsonProperty("nrOfApartments") Integer nrOfApartments, @JsonProperty("lastNotesDrop") LocalDateTime lastNotesDrop, @JsonProperty("registeredPhoneNumbers") Integer registeredPhoneNumbers, @JsonProperty("lastUpdated") LocalDateTime lastUpdated, @JsonProperty("port") PortCode port, @JsonProperty("notes") List<Note> notes) {
         this.name = name;
+        this.uuid =uuid;
         this.address = address;
         this.builtYear = builtYear;
         this.nrOfApartments = nrOfApartments;
@@ -39,6 +42,6 @@ public record HousingSocietyDto(
     }
 
     public static HousingSocietyDto toDto(HousingSociety domain ){
-        return new HousingSocietyDto(domain.getName(),domain.getAddress(),domain.getBuiltYear(),domain.getNrOfApartments(),domain.getLastNotesDrop(),domain.getRegisteredPhoneNumbers(),domain.getLastUpdated(),domain.getPort(),domain.getNotes());
+        return new HousingSocietyDto(domain.getName(),domain.getUuid(),domain.getAddress(),domain.getBuiltYear(),domain.getNrOfApartments(),domain.getLastNotesDrop(),domain.getRegisteredPhoneNumbers(),domain.getLastUpdated(),domain.getPort(),domain.getNotes());
     }
 }

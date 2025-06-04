@@ -38,6 +38,12 @@ public class Controller {
         return hsService.save(hs);
     }
 
+    @PutMapping
+    ResponseEntity<HousingSocietyDto> put(Authentication user, @RequestBody HousingSociety hs){
+        String userId= getUserIdFromAuth(user);
+        return hsService.update(hs,userId);
+    }
+
 
     private String getUserIdFromAuth(Authentication user){
         Jwt jwt = ((JwtAuthenticationToken)user).getToken();

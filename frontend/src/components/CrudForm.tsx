@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 import type { HousingSociety } from "@/types";
 import React from "react";
-import { usePostHS } from "@/hooks/useApiWithUser";
+import { usePostHS, usePutHS } from "@/hooks/useApiWithUser";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -51,7 +51,9 @@ type Props = {
 };
 
 export function CrudFrom({ data }: Props) {
-  const { mutate } = usePostHS();
+  const { mutate: createHS } = usePostHS();
+  const { mutate: updateHS } = usePutHS();
+  const [action, setAction] = React.useState<"submit" | "update" | "delete">("submit");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -108,15 +110,14 @@ export function CrudFrom({ data }: Props) {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     if (action === "update") {
-      // handle update
+      // Merge the id from data into the payload
+      updateHS({ ...values, uuid: data?.uuid } as HousingSociety);
     } else if (action === "delete") {
       // handle delete
     } else {
-      mutate(values as HousingSociety);
+      createHS(values as HousingSociety);
     }
   }
-
-  const [action, setAction] = React.useState<"submit" | "update" | "delete">("submit");
 
   return (
     <Form {...form}>
@@ -318,7 +319,7 @@ export function CrudFrom({ data }: Props) {
               </FormItem>
             )}
           />
-          <span>Last update: </span>
+          <span>Last update: {data?.lastUpdated ? new Date(data.lastUpdated).toLocaleString() : "N/A"}</span>
         </div>
 
         {data ? (

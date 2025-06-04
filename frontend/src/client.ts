@@ -15,6 +15,18 @@ export const postHS = async (data: HousingSociety, token: string) => {
   return res.json();
 };
 
+export const putHS = async (data: HousingSociety, token: string) => {
+  const res = await fetch(`${BASE_URL}`, {
+    method: "Put",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return res.json();
+};
+
 export const getHS = async (token: string): Promise<HousingSociety[]> => {
   const res = await fetch(`${BASE_URL}`, {
     method: "Get",
