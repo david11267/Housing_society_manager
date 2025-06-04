@@ -1,6 +1,8 @@
 package se.davidaslan.housingsocietymanager.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
@@ -30,10 +32,10 @@ public class Controller {
     }
 
     @PostMapping
-    String post(Authentication user, @RequestBody HousingSocietyDto dto){
+    ResponseEntity<HousingSocietyDto> post(Authentication user, @RequestBody HousingSocietyDto dto){
         String userId= getUserIdFromAuth(user);
-        dto.toDomain(userId);
-        return user.isAuthenticated() ? "They are!" : "They are not T_T";
+        HousingSociety hs= dto.toDomain(userId);
+        return hsService.save(hs);
     }
 
 

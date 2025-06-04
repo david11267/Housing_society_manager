@@ -14,8 +14,8 @@ public class HousingSocietyRepository {
         this.db = db;
     }
 
-    public void save(HousingSociety housingSociety) {
-        db.save(housingSociety);
+    public HousingSociety save(HousingSociety housingSociety) {
+        return db.save(housingSociety);
     }
 
     public List<HousingSociety> getAll(String userId){

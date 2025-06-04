@@ -1,6 +1,9 @@
 package se.davidaslan.housingsocietymanager.domain.HousingSociety;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import se.davidaslan.housingsocietymanager.dtos.HousingSocietyDto;
 
 import java.util.List;
 
@@ -10,6 +13,7 @@ public class HousingSocietyService {
 
     @Autowired
     public HousingSocietyService(HousingSocietyRepository repository) {
+
         this.repo = repository;
     }
 
@@ -17,8 +21,10 @@ public class HousingSocietyService {
         return repo.getAll(userId);
     }
 
-    void save(HousingSociety housingSociety){
-        repo.save(housingSociety);
+    public ResponseEntity<HousingSocietyDto> save(HousingSociety housingSociety){
+        HousingSociety created =  repo.save(housingSociety);
+        HousingSocietyDto dtoResp = HousingSocietyDto.toDto(created);
+        return ResponseEntity.status(HttpStatus.CREATED).body(dtoResp);
     }
 
 
