@@ -121,7 +121,7 @@ export function CrudFrom({ data }: Props) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-2 gap-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-1 gap-4">
         <div className="space-y-4">
           <FormField
             control={form.control}
@@ -267,7 +267,7 @@ export function CrudFrom({ data }: Props) {
           />
           <span>Last update: </span>
         </div>
-        <NotesAndComments notes={form.getValues("notes") ?? []} />
+
         {data ? (
           <>
             <Button type="submit" onClick={() => setAction("update")}>
