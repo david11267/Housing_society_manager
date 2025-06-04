@@ -2,12 +2,13 @@ import { getHS, postHS } from '@/client';
 import { data } from '@/types';
 import { useUser } from '@clerk/clerk-react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 
 export function useGetHS() {
   const { user } = useUser();
 
   useQuery({
-    queryKey: ['getHs'],
+    queryKey: ['housingSocieties'],
     queryFn: async () => {
       if (!user) return new Error('no user ');
       const response = await getHS(user.id);
@@ -24,14 +25,14 @@ export function usePostHS() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ['postHs'],
+    mutationKey: ['housingSocieties'],
     mutationFn: async () => {
       if (!user) return new Error('no user ');
       await postHS(data, user.id);
     },
     onError: e => alert('Error: ' + e),
     onSuccess: () => {
-      alert('Added developer');
+      toast('Added developer');
       queryClient.invalidateQueries({ queryKey: ['getHs'] });
     },
   });

@@ -82,6 +82,7 @@ type Props = {
   setSelectedRow: React.Dispatch<React.SetStateAction<FakeData | undefined>>;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleFormSubmit(method: 'create' | 'update' | 'delete'): void;
 };
 
 export default function DataTable({
@@ -89,6 +90,7 @@ export default function DataTable({
   setSelectedRow,
   open,
   setOpen,
+  handleFormSubmit,
 }: Props) {
   const table = useReactTable({
     data,
@@ -103,6 +105,7 @@ export default function DataTable({
       <FormDialog open={open} selectedRow={selectedRow} setOpen={setOpen} />
 
       <TableModifiers
+        handleFormSubmit={handleFormSubmit}
         open={open}
         setOpen={setOpen}
         setSelectedRow={setSelectedRow}

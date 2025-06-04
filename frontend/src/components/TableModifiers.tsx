@@ -8,17 +8,20 @@ type Props = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   table: Table<FakeData>;
+  handleFormSubmit: (method: 'create' | 'update' | 'delete') => void;
 };
 
 export default function TableModifiers({
   setSelectedRow,
   setOpen,
   table,
+  handleFormSubmit,
 }: Props) {
   return (
     <div className="space-x-4 space-y-4">
       <Button
         onClick={() => {
+          handleFormSubmit('create');
           setSelectedRow(undefined);
           setOpen(true);
         }}
