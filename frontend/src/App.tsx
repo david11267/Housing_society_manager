@@ -1,9 +1,9 @@
-import { SignedIn, SignedOut, SignIn } from '@clerk/clerk-react';
-import MainLayout from './layouts/MainLayout';
-import { ThemeProvider } from '@/components/ThemeProvider';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Toaster } from 'sonner';
+import { SignedIn, SignedOut, SignIn } from "@clerk/clerk-react";
+import MainLayout from "./layouts/MainLayout";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "sonner";
 
 const queryClient = new QueryClient();
 

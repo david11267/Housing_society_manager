@@ -2,10 +2,14 @@
 package se.davidaslan.housingsocietymanager.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import se.davidaslan.housingsocietymanager.domain.HousingSociety.HousingSociety;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+@Setter
+@Getter
 @Entity
 @Table(name = "note")
 public class Note {

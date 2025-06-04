@@ -1,10 +1,10 @@
-import DataTable from '@/components/DataTable';
-import NavBar from '@/components/NavBar';
-import { useGetHS } from '@/hooks/useApiWithUser';
-import type { HsData } from '@/types';
-import { useState } from 'react';
+import DataTable from "@/components/DataTable";
+import NavBar from "@/components/NavBar";
+import { useGetHS } from "@/hooks/useApiWithUser";
+import type { HousingSociety } from "@/types";
+import { useState } from "react";
 export default function MainLayout() {
-  const [selectedRow, setSelectedRow] = useState<HsData | undefined>();
+  const [selectedRow, setSelectedRow] = useState<HousingSociety | undefined>();
   const [open, setOpen] = useState(false);
   const { data, error, isLoading } = useGetHS();
 

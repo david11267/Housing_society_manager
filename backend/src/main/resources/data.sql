@@ -1,8 +1,31 @@
-INSERT INTO housing_society (uuid, name, address, built_year, nr_of_apartments, last_notes_drop,
-                             registered_phone_numbers, last_updated, port_code)
-VALUES
-    ('1e4b7a4b-df5d-4b74-a95f-93b5b69df1b2', 'Green Valley Society', '123 Elm Street', 1995, 50,
-     CURRENT_TIMESTAMP, 10, CURRENT_TIMESTAMP, 'GV123');
+INSERT INTO housing_society (
+    uuid,
+    name,
+    address,
+    built_year,
+    nr_of_apartments,
+    last_notes_drop,
+    registered_phone_numbers,
+    last_updated,
+    port_code,
+    port_status,
+    port_accessibility,
+    port_last_update
+)
+VALUES (
+           '1e4b7a4b-df5d-4b74-a95f-93b5b69df1b2',
+           'Green Valley Society',
+           '123 Elm Street',
+           1995,
+           50,
+           CURRENT_TIMESTAMP,
+           10,
+           CURRENT_TIMESTAMP,
+           'GV123',
+           'working',
+           'easy',
+           CURRENT_TIMESTAMP
+       );
 
 INSERT INTO note (uuid, type, header, note, last_updated, due_date_time, housing_society_uuid)
 VALUES
