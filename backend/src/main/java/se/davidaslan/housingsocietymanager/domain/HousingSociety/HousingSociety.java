@@ -1,6 +1,7 @@
 
 package se.davidaslan.housingsocietymanager.domain.HousingSociety;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +19,8 @@ public class HousingSociety {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
+    @Column(name = "userid")
+    private String userId ;
     private String name;
     private String address;
     private int builtYear;

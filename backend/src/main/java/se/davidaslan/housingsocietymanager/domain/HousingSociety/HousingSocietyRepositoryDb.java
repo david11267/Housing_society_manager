@@ -2,6 +2,8 @@ package se.davidaslan.housingsocietymanager.domain.HousingSociety;
 
 import org.springframework.data.repository.ListCrudRepository;
 
+import java.util.List;
+
 public interface HousingSocietyRepositoryDb extends ListCrudRepository<HousingSociety, Long> {
     HousingSociety findByName(String name);
     HousingSociety findById(long id);
@@ -11,4 +13,5 @@ public interface HousingSocietyRepositoryDb extends ListCrudRepository<HousingSo
 
     boolean existsByName(String name);
 
+    List<HousingSociety> findByUserId(String userId);
 }

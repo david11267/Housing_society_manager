@@ -1,6 +1,7 @@
 
 package se.davidaslan.housingsocietymanager.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +24,7 @@ public class Note {
     private LocalDateTime dueDateTime;
     @ManyToOne
     @JoinColumn(name = "housing_society_uuid", nullable = false) // Maps to housing_socity UUID
+    @JsonIgnore
     private HousingSociety housingSociety;
 
 }
