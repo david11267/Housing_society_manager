@@ -11,9 +11,14 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { type HousingSociety } from "@/types";
 import FormDialog from "./FormDialog";
 import TableModifiers from "./TableModifiers";
-
+type Props = {
+  selectedRow: HousingSociety | undefined;
+  setSelectedRow: React.Dispatch<React.SetStateAction<HousingSociety | undefined>>;
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  data: HousingSociety[];
+};
 const columnHelper = createColumnHelper<HousingSociety>();
-
 const columns = [
   columnHelper.accessor("name", {
     header: "Name",
@@ -69,14 +74,6 @@ const columns = [
     cell: (info) => info.getValue().toLocaleString(),
   }),
 ];
-
-type Props = {
-  selectedRow: HousingSociety | undefined;
-  setSelectedRow: React.Dispatch<React.SetStateAction<HousingSociety | undefined>>;
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  data: HousingSociety[];
-};
 
 export default function DataTable({ selectedRow, setSelectedRow, open, setOpen, data }: Props) {
   const table = useReactTable({

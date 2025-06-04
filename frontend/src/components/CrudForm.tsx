@@ -10,6 +10,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 
 import type { HousingSociety } from "@/types";
 import NotesAndComments from "./NotesAndComments";
+import React from "react";
+import { usePostHS } from "@/hooks/useApiWithUser";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -40,7 +42,8 @@ type Props = {
 };
 
 export function CrudFrom({ data }: Props) {
-  // 1. Define your form.
+  const { mutate } = usePostHS();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     mode: "onChange",
@@ -76,17 +79,22 @@ export function CrudFrom({ data }: Props) {
           },
         },
   });
-  // Converts a Date to "YYYY-MM-DDTHH:MM" format
   function toDateLocalString(date: Date): string {
     const pad = (n: number) => n.toString().padStart(2, "0");
     return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
   }
-  // 2. Define a submit handler.
+
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
+    if (action === "update") {
+      // handle update
+    } else if (action === "delete") {
+      // handle delete
+    } else {
+      mutate(values as HousingSociety);
+    }
   }
+
+  const [action, setAction] = React.useState<"submit" | "update" | "delete">("submit");
 
   return (
     <Form {...form}>
@@ -239,13 +247,17 @@ export function CrudFrom({ data }: Props) {
         <NotesAndComments notes={data?.notes} />
         {data ? (
           <>
-            <Button type="submit">Update</Button>
-            <Button variant={"destructive"} type="submit">
+            <Button type="submit" onClick={() => setAction("update")}>
+              Update
+            </Button>
+            <Button type="submit" variant="destructive" onClick={() => setAction("delete")}>
               Delete
             </Button>
           </>
         ) : (
-          <Button type="submit">Submit</Button>
+          <Button type="submit" onClick={() => setAction("submit")}>
+            Submit
+          </Button>
         )}
       </form>
     </Form>
