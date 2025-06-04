@@ -1,118 +1,85 @@
-'use client';
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-import type { HsData } from '@/types';
-import NotesAndComments from './NotesAndComments';
+import type { HousingSociety } from "@/types";
+import NotesAndComments from "./NotesAndComments";
 
 const formSchema = z.object({
-  name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
-  address: z
-    .string()
-    .min(5, { message: 'Address must be at least 5 characters.' }),
-  builtYear: z
-    .number({ message: 'year must be a four digit number' })
-    .positive()
-    .min(1000)
-    .max(2100),
-  nrOfApartments: z
-    .number()
-    .int()
-    .min(1, { message: 'Must have at least 1 apartment.' }),
+  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
+  address: z.string().min(5, { message: "Address must be at least 5 characters." }),
+  builtYear: z.number({ message: "year must be a four digit number" }).positive().min(1000).max(2100),
+  nrOfApartments: z.number().int().min(1, { message: "Must have at least 1 apartment." }),
   lastNotesDrop: z.date({
-    required_error: 'Last notes drop date is required.',
+    required_error: "Last notes drop date is required.",
   }),
-  lastUpdated: z.date({ required_error: 'Last updated date is required.' }),
-  registeredPhoneNumbers: z
-    .number()
-    .int()
-    .min(0, { message: 'Must be zero or more registered phone numbers.' }),
-  portCode: z.object({
+  lastUpdated: z.date({ required_error: "Last updated date is required." }),
+  registeredPhoneNumbers: z.number().int().min(0, { message: "Must be zero or more registered phone numbers." }),
+  port: z.object({
     code: z.string(),
-    status: z.enum(['working', 'broken', 'changed', 'other'], {
+    status: z.enum(["working", "broken", "changed", "other"], {
       required_error: "Status must be 'active' or 'inactive'.",
     }),
-    accessibility: z.enum(['easy', 'medium', 'hard'], {
+    accessibility: z.enum(["easy", "medium", "hard"], {
       required_error: "Accessibility must be 'yes' or 'no'.",
     }),
     lastUpdate: z.date({
-      required_error: 'Port code last update is required.',
+      required_error: "Port code last update is required.",
     }),
   }),
 });
 
 type Props = {
-  data?: HsData;
+  data?: HousingSociety;
 };
 
 export function CrudFrom({ data }: Props) {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    mode: 'onChange',
+    mode: "onChange",
     defaultValues: data
       ? {
           name: data.name,
           address: data.address,
           builtYear: data.builtYear,
           nrOfApartments: data.nrOfApartments,
-          lastNotesDrop: data.lastNotesDrop
-            ? new Date(data.lastNotesDrop)
-            : new Date(),
-          lastUpdated: data.lastUpdated
-            ? new Date(data.lastUpdated)
-            : new Date(),
+          lastNotesDrop: data.lastNotesDrop ? new Date(data.lastNotesDrop) : new Date(),
+          lastUpdated: data.lastUpdated ? new Date(data.lastUpdated) : new Date(),
           registeredPhoneNumbers: data.registeredPhoneNumbers,
-          portCode: {
-            code: data.portCode.code,
-            status: data.portCode.status,
-            accessibility: data.portCode.accessibility,
-            lastUpdate: data.portCode.lastUpdate
-              ? new Date(data.portCode.lastUpdate)
-              : new Date(),
+          port: {
+            code: data.port.code,
+            status: data.port.status,
+            accessibility: data.port.accessibility,
+            lastUpdate: data.port.lastUpdate ? new Date(data.port.lastUpdate) : new Date(),
           },
         }
       : {
-          name: '',
-          address: '',
+          name: "",
+          address: "",
           builtYear: 2000,
           nrOfApartments: 1,
           lastNotesDrop: new Date(),
           lastUpdated: new Date(),
           registeredPhoneNumbers: 0,
-          portCode: {
-            code: '',
-            status: 'working',
-            accessibility: 'easy',
+          port: {
+            code: "",
+            status: "working",
+            accessibility: "easy",
             lastUpdate: new Date(),
           },
         },
   });
   // Converts a Date to "YYYY-MM-DDTHH:MM" format
   function toDateLocalString(date: Date): string {
-    const pad = (n: number) => n.toString().padStart(2, '0');
-    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(
-      date.getDate()
-    )}`;
+    const pad = (n: number) => n.toString().padStart(2, "0");
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
   }
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -123,10 +90,7 @@ export function CrudFrom({ data }: Props) {
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="grid grid-cols-2 gap-4"
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-2 gap-4">
         <div className="space-y-4">
           <FormField
             control={form.control}
@@ -149,10 +113,7 @@ export function CrudFrom({ data }: Props) {
               <FormItem>
                 <FormLabel>Address</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="ex: salt street 53 stockholm"
-                    {...field}
-                  />
+                  <Input placeholder="ex: salt street 53 stockholm" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -168,12 +129,8 @@ export function CrudFrom({ data }: Props) {
                   <Input
                     type="number"
                     placeholder="ex: 1990"
-                    value={field.value ?? ''}
-                    onChange={e =>
-                      field.onChange(
-                        e.target.value ? Number(e.target.value) : ''
-                      )
-                    }
+                    value={field.value ?? ""}
+                    onChange={(e) => field.onChange(e.target.value ? Number(e.target.value) : "")}
                   />
                 </FormControl>
                 <FormMessage />
@@ -190,12 +147,8 @@ export function CrudFrom({ data }: Props) {
                   <Input
                     type="number"
                     placeholder="ex: 43"
-                    value={field.value ?? ''}
-                    onChange={e =>
-                      field.onChange(
-                        e.target.value ? Number(e.target.value) : ''
-                      )
-                    }
+                    value={field.value ?? ""}
+                    onChange={(e) => field.onChange(e.target.value ? Number(e.target.value) : "")}
                   />
                 </FormControl>
                 <FormMessage />
@@ -212,12 +165,8 @@ export function CrudFrom({ data }: Props) {
                 <FormControl>
                   <Input
                     type="date"
-                    value={field.value ? toDateLocalString(field.value) : ''}
-                    onChange={e =>
-                      field.onChange(
-                        e.target.value ? new Date(e.target.value) : null
-                      )
-                    }
+                    value={field.value ? toDateLocalString(field.value) : ""}
+                    onChange={(e) => field.onChange(e.target.value ? new Date(e.target.value) : null)}
                   />
                 </FormControl>
                 <FormMessage />
@@ -227,7 +176,7 @@ export function CrudFrom({ data }: Props) {
 
           <FormField
             control={form.control}
-            name="portCode.code"
+            name="port.code"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Code</FormLabel>
@@ -240,14 +189,11 @@ export function CrudFrom({ data }: Props) {
           />
           <FormField
             control={form.control}
-            name="portCode.status"
+            name="port.status"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Status</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Select port status" />
@@ -267,14 +213,11 @@ export function CrudFrom({ data }: Props) {
           />
           <FormField
             control={form.control}
-            name="portCode.accessibility"
+            name="port.accessibility"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Accessibility</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Select accessibility" />
@@ -297,7 +240,7 @@ export function CrudFrom({ data }: Props) {
         {data ? (
           <>
             <Button type="submit">Update</Button>
-            <Button variant={'destructive'} type="submit">
+            <Button variant={"destructive"} type="submit">
               Delete
             </Button>
           </>
