@@ -1,16 +1,19 @@
-/*
-package se.davidaslan.housingsocietymanager.domain;
+
+package se.davidaslan.housingsocietymanager.domain.HousingSociety;
 
 import jakarta.persistence.*;
+import se.davidaslan.housingsocietymanager.domain.Note;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
-@Table
+@Table(name = "housing_society")
 public class HousingSociety {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID uuid;
     private String name;
     private String address;
     private int builtYear;
@@ -19,8 +22,7 @@ public class HousingSociety {
     private int registeredPhoneNumbers;
     private LocalDateTime lastUpdated;
     private String portCode;
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
-    private List<Note> notes;
 
+    @OneToMany(mappedBy = "housingSociety", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Note> notes;
 }
-*/
