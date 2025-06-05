@@ -13,7 +13,7 @@ public class CorsGlobalConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("https://hack-week-project.vercel.app/") // Use actual frontend domain
+                        .allowedOrigins("https://hack-week-project.vercel.app") // Use actual frontend domain
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
