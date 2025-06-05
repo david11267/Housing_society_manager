@@ -18,12 +18,6 @@ WORKDIR /app
 # Copy the built jar from the builder stage
 COPY --from=builder /app/target/*.jar app.jar
 
-# Set environment variables (these are optional defaults, overridden in GCP)
-ENV JWT_PROVIDER_URI=https://joint-woodcock-98.clerk.accounts.dev \
-    DB_URL=jdbc:postgresql://aws-0-eu-north-1.pooler.supabase.com:5432/postgres \
-    DB_USER=postgres.xnmokrfuddherzaikxsi \
-    DB_PASS=zD4GysuXIVku8uPz
-
 # Expose port (Spring Boot default)
 EXPOSE 8080
 
