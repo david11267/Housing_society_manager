@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://housing-service-backend-876198057788.europe-north2.run.app")
 public class Controller {
     HousingSocietyService hsService;
 
