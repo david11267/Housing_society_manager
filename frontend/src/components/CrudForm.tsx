@@ -397,7 +397,7 @@ export function CrudFrom({ data, setOpen }: Props) {
         </div>
 
         {data ? (
-          <>
+          <div className="space-x-4">
             <Button type="submit" onClick={() => setAction('update')}>
               Update
             </Button>
@@ -408,7 +408,7 @@ export function CrudFrom({ data, setOpen }: Props) {
             >
               Delete
             </Button>
-          </>
+          </div>
         ) : (
           <Button type="submit" onClick={() => setAction('submit')}>
             Submit
