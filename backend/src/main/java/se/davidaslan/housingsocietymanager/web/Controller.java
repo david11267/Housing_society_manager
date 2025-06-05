@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin(origins = "https://hack-week-project.vercel.app/")
+@CrossOrigin
 public class Controller {
     HousingSocietyService hsService;
 
@@ -24,6 +24,10 @@ public class Controller {
         this.hsService = hsService;
     }
 
+
+    @GetMapping("/health")
+    public String healthCheck(){
+        return "OK";}
 
     @GetMapping
     public List<HousingSociety> get(Authentication user){
