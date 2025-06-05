@@ -1,0 +1,23 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    dir: 'backend'                # <-- run docker build inside backend folder
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/housing-backend', '.']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    dir: 'backend'                # <-- docker push must be in same context
+    args: ['push', 'gcr.io/$PROJECT_ID/housing-backend']
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      [
+        'run', 'deploy', 'housing-backend',
+        '--image', 'gcr.io/$PROJECT_ID/housing-backend',
+        '--region', 'europe-north1',
+        '--platform', 'managed',
+        '--allow-unauthenticated',
+        '--port', '8080',
+      ]
+
+images:
+  - 'gcr.io/$PROJECT_ID/housing-backend'
