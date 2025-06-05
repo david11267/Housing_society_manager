@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin(origins = "https://housing-service-backend-876198057788.europe-north2.run.app")
+@CrossOrigin(origins = "https://hack-week-project.vercel.app/")
 public class Controller {
     HousingSocietyService hsService;
 
