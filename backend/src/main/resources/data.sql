@@ -17,7 +17,7 @@ VALUES (
            '1e4b7a4b-df5d-4b74-a95f-93b5b69df1b2',
            'user_2xokaDIhl63Ac24fjnPG4LXsawJ',
            'Green Valley Society',
-           '123 Elm Street',
+           '122 Elm Street',
            1995,
            50,
            CURRENT_TIMESTAMP,
