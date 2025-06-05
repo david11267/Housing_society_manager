@@ -1,0 +1,27 @@
+steps:
+  # Step 1: Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    dir: '.'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/housing-backend', '.']
+
+  # Step 2: Push the image to Google Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/housing-backend']
+
+  # Step 3: Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      [
+        'run', 'deploy', 'housing-backend',
+        '--image', 'gcr.io/$PROJECT_ID/housing-backend',
+        '--region', 'europe-north1',
+        '--platform', 'managed',
+        '--allow-unauthenticated',
+        '--port', '8080',
+        '--set-env-vars',
+        'JWT_PROVIDER_URI=https://joint-woodcock-98.clerk.accounts.dev,DB_URL=jdbc:postgresql://aws-0-eu-north-1.pooler.supabase.com:5432/postgres,DB_USER=postgres.xnmokrfuddherzaikxsi,DB_PASS=zD4GysuXIVku8uPz'
+      ]
+
+images:
+  - 'gcr.io/$PROJECT_ID/housing-backend'
