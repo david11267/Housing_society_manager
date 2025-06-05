@@ -22,6 +22,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT,"/api").authenticated()
                         .requestMatchers(HttpMethod.DELETE,"/api").authenticated()
                         .requestMatchers("/api").authenticated()
+                        .requestMatchers("/api/health").permitAll()
                 )
                 .cors(withDefaults())
                 .oauth2ResourceServer(oauth2  -> oauth2.jwt(withDefaults()))
