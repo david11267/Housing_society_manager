@@ -16,7 +16,7 @@ public class SecurityConfig {
     SecurityFilterChain defaultChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/**").permitAll()
+                        .requestMatchers("/api/**").authenticated()
                 )
                 .cors(withDefaults())
                 .oauth2ResourceServer(oauth2  -> oauth2.jwt(withDefaults()))
