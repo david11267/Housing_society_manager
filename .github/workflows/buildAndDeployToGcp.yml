@@ -30,6 +30,9 @@ jobs:
       - name: Configure docker
         run: gcloud auth configure-docker ${{ vars.GC_REGION }}-docker.pkg.dev
 
+      - name: Move to /backend
+        run: cd backend
+
       - name: Docker Build
         run: docker build --no-cache -t ${{ env.IMAGE_URL }} . -f Dockerfile
 
