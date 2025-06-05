@@ -1,3 +1,4 @@
+/*
 package se.davidaslan.housingsocietymanager.web;
 
 import org.springframework.context.annotation.Bean;
@@ -20,4 +21,4 @@ public class CorsGlobalConfig {
             }
         };
     }
-}
+}*/

@@ -14,7 +14,7 @@ import se.davidaslan.housingsocietymanager.dtos.HousingSocietyDto;
 import java.util.List;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping(value = {"api","api/","/api"})
 @CrossOrigin
 public class Controller {
     HousingSocietyService hsService;
