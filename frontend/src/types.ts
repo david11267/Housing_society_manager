@@ -10,7 +10,7 @@ export type Note = {
   type: string;
   header: string;
   note: string;
-  lastUpdated?: Date;
+  lastUpdated: Date;
   dueDateTime: Date | null;
 };
 
